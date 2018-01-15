@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>Home | FD </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/profile.css" />
+        <link rel="stylesheet" type="text/css" href="css/global.css" />
+        <style>
+            /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+            *, *::after, *::before {
+              box-sizing: border-box;
+            }
+            ul {
+              margin: 0;
+              padding: 0;
+              list-style-type: none;
+            }
+
+            .tiles {
+              position: fixed;
+              left:0;
+              bottom: 0;
+              display: flex;
+              width: 100%;
+              background: #transparent;
+            }
+            .tiles__tile {
+              flex: 1;
+              padding: 20px;
+              background: transparent;
+              transition: all .25s ease-out;
+              /*background: rgba(0, 0, 0, 0.5);*/
+              cursor: pointer;
+              text-align: center;
+              text-transform: lowercase;
+            }
+            .tiles__tile.active:nth-child(1) {
+              background: tomato;
+            }
+            .tiles__tile.active:nth-child(2) {
+              background: deepskyblue;
+            }
+            .tiles__tile.active:nth-child(3) {
+              background: lightseagreen;
+            }
+            .tiles__tile.active:nth-child(4) {
+              background: crimson;
+            }
+            .tiles__tile:hover:nth-child(1) {
+              background: tomato;
+            }
+            .tiles__tile:hover:nth-child(2) {
+              background: deepskyblue;
+            }
+            .tiles__tile:hover:nth-child(3) {
+              background: lightseagreen;
+            }
+            .tiles__tile:hover:nth-child(4) {
+              background: crimson;
+            }
+
+            .content {
+              z-index: 1000;
+              height: 100vh;
+              position: fixed;
+              top: 0;
+              left:0;
+            }
+            .content__item {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100vw;
+              height: 100vh;
+              z-index: 1000;
+              padding-left: 3%;
+              display: flex;
+              align-items: center;
+              padding: 0;
+              text-align: center;
+              transform: scale(0);
+              transition: all 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+            .content__item.active {
+              transform: scale(1);
+            }
+            .content__item.active .content-wraps {
+              transform: scale(1);
+              opacity: 1;
+            }
+            .content__item:nth-child(1) {
+              transform-origin: 0% 100%;
+              background: tomato;
+            }
+            .content__item:nth-child(2) {
+              transform-origin: 33% 100%;
+              background: deepskyblue;
+            }
+            .content__item:nth-child(3) {
+              transform-origin: 66% 100%;
+              background: lightseagreen;
+            }
+            .content__item:nth-child(4) {
+              transform-origin: 100% 100%;
+              background: crimson;
+            }
+            .content__item .content-wraps {
+              transform: scale(0.7);
+              opacity: 0;
+              transition: all 0.8s 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+            .content-wraps{
+                z-index: 1000;
+                padding-left:6em;
+                padding-right:6em;
+            }
+
+            .page {
+              width: 100%;
+              height: 100%;
+              margin: 0;
+              padding: 0;
+              z-index: 2;
+              transition: all 1s cubic-bezier(.5, -0.005, 0.2, 1) !important;
+              -webkit-transition: all 1s cubic-bezier(.5, -0.005, 0.2, 1) !important;
+              overflow: hidden;
+            }
+
+            section {
+              width:400%;  
+            }
+
+            .page {
+              position: absolute;
+            }
+
+            #p1 {
+              left: 0;
+            }
+
+            #p2 {
+              left: 100%;
+              background: #FF5722;
+            }
+
+            #p3 {
+              left: 200%;
+              background: #593C1F;
+            }
+
+            #p4 {
+              left: 300%;
+              background: deeppink;
+            }
+
+            .sider {
+             position: fixed; 
+             z-index: 4;
+            }
+            #t1:target .page#p1 {
+                transform: translateX(0);
+            }
+            #t2:target .page#p2 {
+                transform: translateX(-100%);
+            }
+            #t3:target .page#p3 {
+                transform: translateX(-200%);
+            }
+            #t4:target .page#p4 {
+                transform: translateX(-300%);
+            }
+
+            #t2:target .page#p1, 
+            #t3:target .page#p1,
+            #t4:target .page#p1 {
+              background: #000;
+            }
+
+           
+            #t2:target .page#p1 .icon, 
+            #t3:target .page#p1 .icon,
+            #t4:target .page#p1 .icon {
+              -webkit-filter: blur(3px);
+              filter: blur(3px);
+            }
+
+            .icon {
+              color: #fff;
+              font-size: 32px;
+              display: block;
+            }
+
+            .sider .icon:hover {
+              opacity: 0.6;
+            }
+
+            #p1 .icon .title {
+              margin-bottom: 20px;
+            }
+
+            #t2:target .sider .icon,
+            #t3:target .sider .icon,
+            #t4:target .sider .icon {
+              transform: scale(.6); 
+              transition-delay: .25s;
+            }
+
+            #t2:target #dos {
+              transform: scale(1.2) !important;
+            }
+
+            #t3:target #tres {
+              transform: scale(1.2) !important;
+            }
+
+            #t4:target #cuatro {
+              transform: scale(1.2) !important;
+            }
+
+            .sider {
+              position: fixed;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              /*right: 0;*/
+              margin: auto;
+              height: 280px;
+              width: 10%;
+              padding: 0;
+              text-align: center;
+             }
+
+            .sider li {
+              margin: 30px 0;
+            }
+
+            a {
+              text-decoration: none;
+              font-family: open sans, sans-serif;
+            }
+
+            .title, .hint {
+              font-family: open sans, sans-serif;
+              display: block;
+            }
+
+            .title {
+              font-size: 38px;
+            }
+
+            .hint {
+              font-size: 13px;
+            }
+
+            .hint a {
+              color: #EFFF06;
+              transition: all 250ms easet-out;
+            }
+
+            .hint a:hover {
+              color: #FFF;
+            }
+
+            .page .icon {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              right: 10%;
+              left: 0;
+              margin: auto;
+              text-align: center;
+              font-size: 80px;
+              transform: translateX(360%);
+              line-height: 1.3;
+            }
+
+            .page#p1 .icon {
+              height: 220px;
+            }
+
+            .page#p1 .icon {
+              transform: translateX(0) !important;
+            }
+
+            #t2:target .page#p2 .icon {
+              transform: translateX(0) !important;
+              transition-delay: 1s;
+            }
+
+            #t3:target .page#p3 .icon {
+              transform: translateX(0) !important;
+              transition-delay: 1s;
+            }
+
+            #t4:target .page#p4 .icon {
+              transform: translateX(0) !important;
+              transition-delay: 1s;
+            }
+
+            .credit{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 10px;
+            }
+
+            .credit a {
+                color: #fff
+            }
+
+
+            /* --------------- */
+            h2 {
+              font-weight: 300;
+            }
+
+            h3 {
+              font-size: 48px;
+            }
+
+            p {
+              font-weight: 300;
+              font-size: 24px;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+        
+    </head>
+    <body>
+        <div class="head">
+            <div class="name">
+食べ物<span></span>
+            </div>
+            <div class="sub-name">Fo|oD</div>
+            <div class="down"></div>
+        </div>
+
+        <div class="menu">
+            <h1 class="home">F<span>D</span></h1>
+            <ul class="topnav">
+                <li></li>
+            </ul>
+        </div>
+        <div>
+            <div class="ct" id="t1">
+                <div class="ct" id="t2">
+                    <div class="ct" id="t3">
+                        <div class="ct" id="t4">
+                            <section>  
+                                <ul class="sider">
+                                    <a href="#t1" ><li class="icon fa fa-home" style="font-size:1.2em" id="uno"></li></a>
+                                    <a href="#t2" ><li class="icon fa fa-globe" style="font-size:1.2em" id="dos"></li></a>
+                                    <a href="#t3" ><li class="icon fa fa-user-o" style="font-size:1.2em" id="tres"></li></a>
+                                    <a href="#t4" ><li class="icon fa fa-cog" style="font-size:1.2em" id="cuatro"></li></a>
+                                </ul>
+                                <div class="content-wrap page" id="p1">
+                                    <div class="sec intro">
+                                        <div class="text-contain">
+                                          <div class="text">
+                                            <h2>I Am A Boston-Based</h2>
+                                            <h3>Photographer and Front-End Enthusiast</h3>
+                                            <h5>Cat lover, pizza hound, horror fiend</h5>
+                                            <h5 id="bot-h5"><span>And this is what i do</span></h5>
+                                          </div>
+                                          <div class="pg-btn begin">
+                                              Begin
+                                          </div> 
+                                          <ul class="tiles" >
+                                            <li class="tiles__tile" data-tile="1">
+                                              <h2 style="font-size:15px">About Us</h2>
+                                            </li>
+                                            <li class="tiles__tile" data-tile="2">
+                                              <h2 style="font-size:15px">Our Story</h2>
+                                            </li>
+                                            <li class="tiles__tile" data-tile="3">
+                                              <h2 style="font-size:15px">Our Team</h2>
+                                            </li>
+                                            <li class="tiles__tile" data-tile="4">
+                                              <h2 style="font-size:15px">Our Services</h2>
+                                            </li>
+                                          </ul>
+                                          <ul class="content">
+                                            <li class="content__item" id="1">
+                                              <div class="content-wraps">
+                                                <h3>Apples</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et reprehenderit nostrum nisi aliquam nemo non fugit, minus, ex ullam vel minima libero, eius labore. Veritatis odit blanditiis quidem amet accusantium.</p>
+                                              </div>
+                                            </li>
+                                            <li class="content__item" id="2">
+                                              <div class="content-wraps">
+                                                <h3>Bananas</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et reprehenderit nostrum nisi aliquam nemo non fugit, minus, ex ullam vel minima libero, eius labore. Veritatis odit blanditiis quidem amet accusantium.</p>
+                                              </div>
+                                            </li>
+                                            <li class="content__item" id="3">
+                                              <div class="content-wraps">
+                                                <h3>Cucumbers</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias nam nesciunt maiores. Nesciunt explicabo ea deserunt facere sunt, autem, reiciendis nobis, velit accusantium laudantium quis non ratione aspernatur. Eum, doloribus?</p>
+                                              </div>
+                                            </li>
+                                            <li class="content__item" id="4">
+                                              <div class="content-wraps">
+                                                <h3>Spinach</h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi velit iure expedita quis, blanditiis. Consectetur incidunt distinctio dolor ullam beatae cum maiores quas pariatur amet, temporibus ad commodi dolorem provident.</p>
+                                              </div>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="page" id="p2">
+                                  <div class="ui">
+                                    <div class="left-menu">
+                                        <form action="#" class="search">
+                                          <input placeholder="search..." type="search" name="" id="">
+                                          <input type="submit" value="&#xf002;">
+                                        </form>
+                                        <menu class="list-friends">
+                                          <li>
+                                            <img width="50" height="50" src="http://cs625730.vk.me/v625730358/1126a/qEjM1AnybRA.jpg">
+                                            <div class="info">
+                                              <div class="user">Юния Гапонович</div>
+                                              <div class="status on"> online</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/1">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status on"> online</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/2">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status off">left 3 min age</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/3">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status on"> online</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/4">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status off">left 4 min age</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/5">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status off">left 12 min age</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/6">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status off">left 13 min age</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/7">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status on">online</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/8">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status off">left 6 min age</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/9">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status on">online</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/10">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status off">left 1 min age</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/0">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status on">online</div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <img width="50" height="50" src="http://lorempixel.com/50/50/people/99">
+                                            <div class="info">
+                                              <div class="user">Name Fam</div>
+                                              <div class="status off">left 23 min age</div>
+                                            </div>
+                                          </li>
+                                        </menu>
+                                    </div>
+                                    <div class="chat" style="background:#fff;width:40%;">
+                                      <div class="top">
+                                        <div class="avatar">
+                                          <img width="50" height="50" src="http://cs625730.vk.me/v625730358/1126a/qEjM1AnybRA.jpg">
+                                        </div>
+                                        <div class="info">
+                                          <div class="name">Юния Гапонович</div>
+                                          <div class="count">already 1 902 messages</div>
+                                        </div>
+                                        <i class="fa fa-star"></i>
+                                      </div>
+                                      <ul class="messages">
+                                        <li class="i">
+                                          <div class="head">
+                                            <span class="time">10:13 AM, Today</span>
+                                            <span class="name">Буль</span>
+                                          </div>
+                                          <div class="message">Привет!</div>
+                                        </li>
+                                        <li class="i">
+                                          <div class="head">
+                                            <span class="time">10:13 AM, Today</span>
+                                            <span class="name">Буль</span>
+                                          </div>
+                                          <div class="message">)</div>
+                                        </li>
+                                        <li class="i">
+                                          <div class="head">
+                                            <span class="time">10:14 AM, Today</span>
+                                            <span class="name">Буль</span>
+                                          </div>
+                                          <div class="message">М не счастья..</div>
+                                        </li>
+                                        <li class="friend-with-a-SVAGina">
+                                          <div class="head">
+                                            <span class="name">Юния</span>
+                                            <span class="time">10:15 AM, Today</span>
+                                          </div>
+                                          <div class="message">чего тебе?</div>
+                                        </li>
+                                      </ul>
+                                      <div class="write-form">
+                                        <textarea placeholder="Type your message" name="e" id="texxt"  rows="2"></textarea>
+                                        <i class="fa fa-picture-o"></i>
+                                        <i class="fa fa-file-o"></i>
+                                        <span class="send">Send</span>
+                                      </div>
+                                    </div>
+                                    <div class="chat" style="width:43%;">
+                                      <div class="top">
+                                        <div class="avatar">
+                                          <img width="50" height="50" src="http://cs625730.vk.me/v625730358/1126a/qEjM1AnybRA.jpg">
+                                        </div>
+                                        <div class="info">
+                                          <div class="name">Юния Гапонович</div>
+                                          <div class="count">already 1 902 messages</div>
+                                        </div>
+                                        <i class="fa fa-star"></i>
+                                      </div>
+                                      <ul class="messages">
+                                        <li class="i">
+                                          <div class="head">
+                                            <span class="time">10:13 AM, Today</span>
+                                            <span class="name">Буль</span>
+                                          </div>
+                                          <div class="message">Привет!</div>
+                                        </li>
+                                        <li class="i">
+                                          <div class="head">
+                                            <span class="time">10:13 AM, Today</span>
+                                            <span class="name">Буль</span>
+                                          </div>
+                                          <div class="message">)</div>
+                                        </li>
+                                        <li class="i">
+                                          <div class="head">
+                                            <span class="time">10:14 AM, Today</span>
+                                            <span class="name">Буль</span>
+                                          </div>
+                                          <div class="message">М не счастья..</div>
+                                        </li>
+                                        <li class="friend-with-a-SVAGina">
+                                          <div class="head">
+                                            <span class="name">Юния</span>
+                                            <span class="time">10:15 AM, Today</span>
+                                          </div>
+                                          <div class="message">чего тебе?</div>
+                                        </li>
+                                      </ul>
+                                      <div class="write-form">
+                                        <textarea placeholder="Type your message" name="e" id="texxt"  rows="2"></textarea>
+                                        <i class="fa fa-picture-o"></i>
+                                        <i class="fa fa-file-o"></i>
+                                        <span class="send">Send</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>  
+                                <div class="page" id="p3">
+                                  <div class="profile">
+                                    <h1> Jane Smith</h1>
+                                    <div class="infoHolder">
+                                    <h2>Brand Mananger</h2>
+                                    <p>Lorem ipsum dolor sit amet, metus convallis ut malesuada, qui semper, at non. Tincidunt donec aliquam vestibulum nisl. Pulvinar curabitur tellus, a sed sit vitae morbi. Suscipit saepe et praesent aenean laoreet, morbi justo pede eget, cras vestibulum, blandit mauris dignissimos pharetra dui, ut enim mauris nec adipiscing blandit. </p></div>
+                                      
+                                    <div class="imageHolder"><img class="profilePic" src="https://images.unsplash.com/photo-1418833893919-fa9c83e8d69e?dpr=1&auto=format&fit=crop&w=1500&h=2250&q=80&cs=tinysrgb&crop="></div>
+                                  </div>
+                                </div>
+                                <div class="page" id="p4">
+                                </div>  
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side sec-A">
+            <div class="desc">
+               <h1>Posts</h1>
+            </div>
+            <div class="sub-btn code-btn">
+            Chefs
+            </div>
+        </div>
+        
+        <div class="side sec-B">
+            <div class="desc">
+                <h1>Chefs</h1>
+            </div>
+            <div class="sub-btn back-btn">
+            Back
+            </div>
+        </div>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/nicescroll/3.5.4/jquery.nicescroll.js'></script>
+        <script src="js/glitch.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/global.js"></script>
+        <script src="js/menu.js"></script>
+    </body>
+</html>
