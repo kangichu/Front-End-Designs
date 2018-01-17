@@ -17,7 +17,7 @@ body {
   background-image: linear-gradient(to bottom left, rgba(255, 255, 255, 0.6), transparent 60%, rgba(0, 0, 0, 0.6)), linear-gradient(to top left, #a0d3e4, #97d1e7);
 }
 .ui {
-  margin: 4em 5em 3.5em 5em;
+  margin: 4em 5em 3.5em 6em;
   width: 86%;
   height: 90%;
   background-color: transparent;

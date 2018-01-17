@@ -12,9 +12,10 @@ html, body {
 }
 
 .profile {
-  width: 1080px;
+  width: 680px;
+  height: 30%;
   top: 3em;
-  left: 50%;
+  left: 65%;
   float: left;
   position: relative;
   margin: 50px 0px 50px 0px;
@@ -130,7 +131,7 @@ html, body {
 
 @media screen and (min-width: 1080px) {
   .profile h1 {
-    font-size: 120pt !important;
+    font-size: 50pt !important;
     letter-spacing: 20pt !important;
   }
   .profile h1:after {

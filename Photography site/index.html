@@ -10,10 +10,27 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/profile.css" />
         <link rel="stylesheet" type="text/css" href="css/global.css" />
+        <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/categories.css" />
+        <link rel="stylesheet" type="text/css" href="css/component.css" />
+        <script src="js/modernizr.custom.js"></script>
         <style>
             /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
             *, *::after, *::before {
               box-sizing: border-box;
+            }
+            body::-webkit-scrollbar {
+                width: 0.01em;
+            }
+             
+            body::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            }
+             
+            body::-webkit-scrollbar-thumb {
+              background-color: darkgrey;
+              outline: 1px solid slategrey;
             }
             ul {
               margin: 0;
@@ -145,17 +162,17 @@
 
             #p2 {
               left: 100%;
-              background: #FF5722;
+              background: #222;
             }
 
             #p3 {
               left: 200%;
-              background: #593C1F;
+              background: #222;
             }
 
             #p4 {
               left: 300%;
-              background: deeppink;
+              background: #222;
             }
 
             .sider {
@@ -328,17 +345,19 @@
               font-weight: 300;
               font-size: 24px;
             }
+
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
         
     </head>
     <body>
         <div class="head">
-            <div class="name">
-食べ物<span></span>
+          <main>
+            <div class="name">食べ物<span></span>
             </div>
-            <div class="sub-name">Fo|oD</div>
+            <div class="sub-name">F|D</div>
             <div class="down"></div>
+          </main>
         </div>
 
         <div class="menu">
@@ -614,16 +633,68 @@
                                   </div>
                                 </div>  
                                 <div class="page" id="p3">
+                                  
+                                  <div id="vs-container" class="vs-container">
+                                    <header class="vs-header"><br \>
+                                      <ul class="vs-nav">
+                                        <li><a href="#section-1">Posts</a></li>
+                                        <li><a href="#section-2">Chefs</a></li>
+                                        <li><a href="#section-3">Recipies</a></li>
+                                        <li><a href="#section-4">Attack everything</a></li>
+                                        <li><a href="#section-5">Find something</a></li>
+                                      </ul>
+                                    </header>
+                                    <div class="vs-wrapper">
+                                      <section id="section-1">
+                                        <div class="vs-content">
+                                          <div class="col">
+
+                                          </div>
+                                        </div>
+                                      </section>
+                                      <section id="section-2">
+                                        <div class="vs-content">
+                                          <h2>Stretch hopped up on goofballs</h2>
+                                          <div class="col">
+                                            
+                                          </div>
+                                        </div>
+                                      </section>
+                                      <section id="section-3">
+                                        <div class="vs-content">
+                                          <h2>Inspect anything brought into the house drapes inspect anything brought into the house yet stand in front of the computer screen</h2>
+                                          <div class="col">
+                                            
+                                          </div>
+                                        </div>
+                                      </section>
+                                      <section id="section-4">
+                                        <div class="vs-content">
+                                          <h2>Attack feet hide when guests come</h2>
+                                          <div class="col">
+                                            
+                                          </div>
+                                        </div>
+                                      </section>
+                                      <section id="section-5">
+                                        <div class="vs-content">
+                                          <h2>Find something else more interesting inspect anything brought</h2>
+                                          <div class="col">
+                                            
+                                          </div>
+                                        </div>
+                                      </section>
+                                    </div>
+                                  </div><!-- /vs-container -->
+                                </div>
+                                <div class="page" id="p4">
                                   <div class="profile">
                                     <h1> Jane Smith</h1>
                                     <div class="infoHolder">
                                     <h2>Brand Mananger</h2>
                                     <p>Lorem ipsum dolor sit amet, metus convallis ut malesuada, qui semper, at non. Tincidunt donec aliquam vestibulum nisl. Pulvinar curabitur tellus, a sed sit vitae morbi. Suscipit saepe et praesent aenean laoreet, morbi justo pede eget, cras vestibulum, blandit mauris dignissimos pharetra dui, ut enim mauris nec adipiscing blandit. </p></div>
-                                      
                                     <div class="imageHolder"><img class="profilePic" src="https://images.unsplash.com/photo-1418833893919-fa9c83e8d69e?dpr=1&auto=format&fit=crop&w=1500&h=2250&q=80&cs=tinysrgb&crop="></div>
                                   </div>
-                                </div>
-                                <div class="page" id="p4">
                                 </div>  
                             </section>
                         </div>
@@ -637,6 +708,122 @@
             </div>
             <div class="sub-btn code-btn">
             Chefs
+            </div>
+            <div class="cont s--inactive">
+              <!-- cont inner start -->
+              <div class="cont__inner">
+                <!-- el start -->
+                <div class="el">
+                  <div class="el__overflow">
+                    <div class="el__inner">
+                      <div class="el__bg"></div>
+                      <div class="el__preview-cont">
+                        <h2 class="el__heading">Appetizers</h2>
+                      </div>
+                      <div class="el__content">
+                        <div class="el__text">Whatever</div>
+                        <div class="el__close-btn"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="el__index">
+                    <div class="el__index-back">1</div>
+                    <div class="el__index-front">
+                      <div class="el__index-overlay" data-index="1">1</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- el end -->
+                <!-- el start -->
+                <div class="el">
+                  <div class="el__overflow">
+                    <div class="el__inner">
+                      <div class="el__bg"></div>
+                      <div class="el__preview-cont">
+                        <h2 class="el__heading">Breakfast & Brunch</h2>
+                      </div>
+                      <div class="el__content">
+                        <div class="el__text">Whatever</div>
+                        <div class="el__close-btn"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="el__index">
+                    <div class="el__index-back">2</div>
+                    <div class="el__index-front">
+                      <div class="el__index-overlay" data-index="2">2</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- el end -->
+                <!-- el start -->
+                <div class="el">
+                  <div class="el__overflow">
+                    <div class="el__inner">
+                      <div class="el__bg"></div>
+                      <div class="el__preview-cont">
+                        <h2 class="el__heading">Main Dish</h2>
+                      </div>
+                      <div class="el__content">
+                        <div class="el__text">Whatever</div>
+                        <div class="el__close-btn"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="el__index">
+                    <div class="el__index-back">3</div>
+                    <div class="el__index-front">
+                      <div class="el__index-overlay" data-index="3">3</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- el end -->
+                <!-- el start -->
+                <div class="el">
+                  <div class="el__overflow">
+                    <div class="el__inner">
+                      <div class="el__bg"></div>
+                      <div class="el__preview-cont">
+                        <h2 class="el__heading">Desserts</h2>
+                      </div>
+                      <div class="el__content">
+                        <div class="el__text">Whatever</div>
+                        <div class="el__close-btn"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="el__index">
+                    <div class="el__index-back">4</div>
+                    <div class="el__index-front">
+                      <div class="el__index-overlay" data-index="4">4</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- el end -->
+                <!-- el start -->
+                <div class="el">
+                  <div class="el__overflow">
+                    <div class="el__inner">
+                      <div class="el__bg"></div>
+                      <div class="el__preview-cont">
+                        <h2 class="el__heading">Drinks</h2>
+                      </div>
+                      <div class="el__content">
+                        <div class="el__text">Whatever</div>
+                        <div class="el__close-btn"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="el__index">
+                    <div class="el__index-back">5</div>
+                    <div class="el__index-front">
+                      <div class="el__index-overlay" data-index="5">5</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- el end -->
+              </div>
+            <!-- cont inner end -->
             </div>
         </div>
         
@@ -654,5 +841,9 @@
         <script src="js/index.js"></script>
         <script src="js/global.js"></script>
         <script src="js/menu.js"></script>
+        <script src="js/classie.js"></script>
+        <script src="js/hammer.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/categories.js"></script>
     </body>
 </html>
